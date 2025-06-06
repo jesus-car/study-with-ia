@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Markdown File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        <!-- Y añade este estilo en la sección <style> -->
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Markdown File</h1>
+    <div class="error-message" th:if="${error}" th:text="${error}"></div>
+
+    <form th:action="@{/documents/upload}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="file">Select Markdown File (.md)</label>
+            <input type="file" id="file" name="file" accept=".md" required>
+        </div>
+        
+        <button type="submit" class="btn">Upload</button>
+    </form>
+</body>
+</html>
