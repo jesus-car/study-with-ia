@@ -7,9 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-
 @Configuration
 public class AiConfig {
 
@@ -18,14 +15,10 @@ public class AiConfig {
 
     @Bean
     ChatClient chatClient(ChatClient.Builder builder){
-        try {
-            System.out.println("Loading AI configuration with system prompt: " + proSystemPrompt.getContentAsString(StandardCharsets.UTF_8));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         return builder.defaultSystem(proSystemPrompt)
                 .defaultOptions(ChatOptions.builder()
+                        .temperature(0.4)
+                        .topP(0.9)
                         .build())
                 .build();
     }
